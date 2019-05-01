@@ -1,0 +1,45 @@
+@import 'mixin';
+body,
+html {
+  font-size: $font-base-size * 1px;
+  background-color: #fff;
+  @media screen and (min-width: 375px) and (max-width: 414px) {
+    font-size: $font-base-size * 1px;
+  }
+  @media screen and (min-width: 320px) and (max-width: 374px) {
+    font-size: $font-base-size * 1px;
+  }
+  @media screen and (max-width: 319px) {
+    font-size: ($font-base-size - 1) * 1px;
+  }
+}
+.edui-default {
+  line-height: normal;
+  box-sizing: content-box;
+}
+button,
+input,
+select,
+textarea {
+  outline: 0;
+}
+a {
+  text-decoration: none;
+}
+* {
+  margin: 0;
+  padding: 0;
+  border: none;
+  box-sizing: border-box;
+}
+ol,
+ul {
+  list-style: none;
+}
+.icon {
+  display: inline-block;
+  vertical-align: middle;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}

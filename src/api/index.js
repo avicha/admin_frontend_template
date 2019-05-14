@@ -4,8 +4,8 @@
 let _beforeFetchHandler = () => {}
 let _afterFetchHandler = () => {}
 let _errorFetchHandler = ({
-  errcode,
-  errmsg
+  code,
+  message
 }) => {}
 
 const API = {
@@ -25,19 +25,19 @@ const API = {
         _afterFetchHandler()
         return res.json()
       }).then(json => {
-        if (!json.errcode) {
-          resolve(json)
+        if (json.code == 200) {
+          resolve(json.data)
         } else {
           let errorResp
-          if (json && json.errcode) {
+          if (json && json.code) {
             errorResp = {
-              errcode: json.errcode,
-              errmsg: json.errmsg
+              code: json.code,
+              message: json.message
             }
           } else {
             errorResp = {
-              errcode: 500,
-              errmsg: JSON.stringify(json)
+              code: 500,
+              message: JSON.stringify(json)
             }
           }
           _errorFetchHandler(errorResp)
@@ -45,8 +45,8 @@ const API = {
         }
       }).catch(e => {
         let errorResp = {
-          errcode: 500,
-          errmsg: '网络出了点小错误，请稍后再试'
+          code: 500,
+          message: '网络出了点小错误，请稍后再试'
         }
         _errorFetchHandler(errorResp)
         reject(errorResp)

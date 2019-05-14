@@ -5,6 +5,12 @@ import UserRouter from './user'
 Vue.use(Router)
 
 export default new Router({
-  routes: [].concat(UserRouter),
+  routes: [{
+    path: '/',
+    name: 'Index',
+    redirect: {
+      name: 'UserDashboard'
+    }
+  }].concat(UserRouter),
   mode: 'history'
 })

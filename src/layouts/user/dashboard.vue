@@ -14,6 +14,7 @@ export default {
     return {
       user: {
         username: '',
+        nickname: '',
         last_login_time: Date.now()
       }
     }
@@ -25,12 +26,12 @@ export default {
 
   },
   created() {
-    currentUser().then(result => {
-      if (!result) {
+    currentUser().then(user => {
+      if (!user) {
         this.$router.push({ name: 'UserSignIn', query: { redirect_url: this.$route.name } })
       } else {
-        this.user = result
-        localStorage.setItem('username', result.username)
+        this.user = user
+        localStorage.setItem('username', user.nickname || user.username)
       }
     })
   }

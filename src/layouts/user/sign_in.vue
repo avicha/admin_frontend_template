@@ -45,11 +45,9 @@ export default {
   },
   methods: {
     signIn() {
-      signInUser(this.user).then(({ result }) => {
-        if (result.token) {
-          localStorage.setItem('token', result.token)
-          this.$router.push({ name: this.redirect_url || 'UserDashboard' })
-        }
+      signInUser(this.user).then(({ token }) => {
+        localStorage.setItem('token', token)
+        this.$router.push({ name: this.redirect_url || 'UserDashboard' })
       })
     }
   }

@@ -58,12 +58,12 @@ export default {
   methods: {
     defineApiErrorHandler() {
       API.defineErrorFetchHandler(json => {
-        let errcode = json.errcode
+        let code = json.code
         this.$message.error({
-          message: json.errmsg,
+          message: json.message,
           duration: 2000,
           onClose: () => {
-            if (errcode == 401001 || errcode == 440001) {
+            if (code == 401001 || code == 440001) {
               localStorage.removeItem('token')
               this.$router.push({ name: 'UserSignIn', query: { redirect_url: this.$route.name } })
             }

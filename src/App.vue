@@ -6,7 +6,7 @@
       <div class="logo">后台管理后台</div>
       <el-dropdown @command="handleCommand">
         <span class="el-dropdown-link">
-          {{ username }}<i class="el-icon-arrow-down el-icon--right"></i>
+          {{ user.nickname || user.username }}<i class="el-icon-arrow-down el-icon--right"></i>
         </span>
         <el-dropdown-menu slot="dropdown">
           <el-dropdown-item command="UserResetPassword">重置密码</el-dropdown-item>
@@ -38,15 +38,17 @@ Vue.use(DropdownItem)
 
 import Menu from '@/components/menu'
 import API from '@/api'
-
+import g from '@/g'
 export default {
   name: 'App',
+  data() {
+    return {
+      user: g.user
+    }
+  },
   computed: {
     pageName() {
       return this.$route.name
-    },
-    username() {
-      return localStorage.getItem('username')
     }
   },
   components: {

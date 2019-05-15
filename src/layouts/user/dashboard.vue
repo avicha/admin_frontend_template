@@ -8,32 +8,17 @@
 import Vue from 'vue'
 import { formatDate } from '@/filters/formatter'
 import { currentUser } from '@/api/user'
+import g from '@/g'
+
 export default {
   name: 'UserDashboard',
   data() {
     return {
-      user: {
-        username: '',
-        nickname: '',
-        last_login_time: Date.now()
-      }
+      user: g.user
     }
   },
   filters: {
     formatDate
-  },
-  computed: {
-
-  },
-  created() {
-    currentUser().then(user => {
-      if (!user) {
-        this.$router.push({ name: 'UserSignIn', query: { redirect_url: this.$route.name } })
-      } else {
-        this.user = user
-        localStorage.setItem('username', user.nickname || user.username)
-      }
-    })
   }
 }
 </script>

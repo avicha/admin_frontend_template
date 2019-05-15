@@ -3,8 +3,10 @@ import {
   MessageBox
 } from 'element-ui'
 import {
+  currentUser,
   logoutUser
 } from '@/api/user'
+import g from '@/g'
 
 const logoutConfirm = (to, from, next) => {
   MessageBox.confirm('是否确定退出登录?', '提示', {
@@ -27,6 +29,26 @@ const logoutConfirm = (to, from, next) => {
     next(false)
   })
 }
+const loginRequired = (to, from, next) => {
+  if (g.user.username) {
+    next()
+  } else {
+    currentUser().then(user => {
+      if (!user) {
+        next({
+          name: 'UserSignIn',
+          query: {
+            redirect_url: to.name
+          }
+        })
+      } else {
+        Object.assign(g.user, user)
+        next()
+      }
+    })
+  }
+}
 export {
+  loginRequired,
   logoutConfirm
 }

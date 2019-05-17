@@ -1,6 +1,3 @@
-// import 'whatwg-fetch'
-// import 'formdata-polyfill'
-
 let _beforeFetchHandler = () => {}
 let _afterFetchHandler = () => {}
 let _errorFetchHandler = ({
@@ -10,10 +7,10 @@ let _errorFetchHandler = ({
 
 const API = {
   defineBeboreFetchHandler(fn) {
-    _before_fetch_handler = fn
+    _beforeFetchHandler = fn
   },
   defineAfterFetchHandler(fn) {
-    _after_fetch_handler = fn
+    _afterFetchHandler = fn
   },
   defineErrorFetchHandler(fn) {
     _errorFetchHandler = fn

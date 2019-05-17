@@ -1,11 +1,7 @@
-const UserIndex = () =>
-  import('@/layouts/user/index')
-const UserSignIn = () =>
-  import('@/layouts/user/sign_in')
-const UserDashboard = () =>
-  import('@/layouts/user/dashboard')
-const UserResetPassword = () =>
-  import('@/layouts/user/reset_password')
+const UserIndex = () => import('@/layouts/user/index')
+const UserSignIn = () => import('@/layouts/user/sign_in')
+const UserDashboard = () => import('@/layouts/user/dashboard')
+const UserResetPassword = () => import('@/layouts/user/reset_password')
 import {
   loginRequired,
   logoutConfirm

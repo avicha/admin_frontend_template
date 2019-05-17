@@ -3,10 +3,9 @@ import {
   MessageBox
 } from 'element-ui'
 import {
-  currentUser,
   logoutUser
 } from '@/api/user'
-import g from '@/g'
+import store from '@/store'
 
 const logoutConfirm = (to, from, next) => {
   MessageBox.confirm('是否确定退出登录?', '提示', {
@@ -30,10 +29,10 @@ const logoutConfirm = (to, from, next) => {
   })
 }
 const loginRequired = (to, from, next) => {
-  if (g.user.username) {
+  if (store.currentUser) {
     next()
   } else {
-    currentUser().then(user => {
+    store.dispatch('getCurrentUser').then(user => {
       if (!user) {
         next({
           name: 'UserSignIn',
@@ -42,7 +41,6 @@ const loginRequired = (to, from, next) => {
           }
         })
       } else {
-        Object.assign(g.user, user)
         next()
       }
     })

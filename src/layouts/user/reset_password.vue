@@ -69,7 +69,8 @@ export default {
 .user-reset-password-page {
   background-color: #fff;
   .reset-password-form {
-    margin: 150px auto 0;
+    margin: 0 auto;
+    padding: 150px 0;
     width: 500px;
   }
 }

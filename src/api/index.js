@@ -15,6 +15,45 @@ const API = {
   defineErrorFetchHandler(fn) {
     _errorFetchHandler = fn
   },
+  restful(name, prefix, methods = ['get', 'list', 'create', 'update', 'delete', 'restore']) {
+    const apis = {}
+    const API_PREFIX = `${process.env.API_HOST}${prefix}`
+    for (const method of methods) {
+      switch (method.toLowerCase()) {
+        case 'get':
+          apis[`get${name}`] = (id) => {
+            return API.get(`${API_PREFIX}/${id}`)
+          }
+          break
+        case 'list':
+          apis[`list${name}`] = (options) => {
+            return API.get(`${API_PREFIX}`, options)
+          }
+          break
+        case 'create':
+          apis[`create${name}`] = (object) => {
+            return API.postJson(`${API_PREFIX}`, object)
+          }
+          break
+        case 'update':
+          apis[`update${name}`] = (object) => {
+            return API.put(`${API_PREFIX}/${object.id}`, object)
+          }
+          break
+        case 'delete':
+          apis[`delete${name}`] = (id) => {
+            return API.delete(`${API_PREFIX}/${id}`)
+          }
+          break
+        case 'restore':
+          apis[`restore${name}`] = (id) => {
+            return API.put(`${API_PREFIX}/${id}/restore`)
+          }
+          break
+      }
+    }
+    return apis
+  },
   fetch(...args) {
     _beforeFetchHandler()
     return new Promise((resolve, reject) => {
@@ -22,7 +61,7 @@ const API = {
         _afterFetchHandler()
         return res.json()
       }).then(json => {
-        if (json.code == 200) {
+        if (/^2\d{2}/.test(json.code)) {
           resolve(json.data)
         } else {
           let errorResp

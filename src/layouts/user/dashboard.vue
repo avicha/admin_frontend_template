@@ -1,20 +1,16 @@
 <template>
   <div class="user-dashboard-page">
-    <p class="title">欢迎您回来，亲爱的{{ currentUser.username }}，上次登录时间：{{ new Date(currentUser.last_login_time) | formatDate('yyyy-MM-dd HH:mm:ss') }}</p>
+    <p class="title">欢迎您回来，亲爱的{{ currentUser.username }}</p>
   </div>
 </template>
 <script>
 import Vue from 'vue'
 import { mapState } from 'vuex'
-import { formatDate } from '@/filters/formatter'
 import { currentUser } from '@/api/user'
 
 export default {
   name: 'UserDashboard',
-  computed: mapState(['currentUser']),
-  filters: {
-    formatDate
-  }
+  computed: mapState(['currentUser'])
 }
 </script>
 <style lang="scss">

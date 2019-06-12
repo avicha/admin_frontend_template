@@ -1,10 +1,10 @@
 <template>
   <div class="menu">
-    <el-menu :default-active="$route.name" :router="true" :default-openeds="['Project', 'Other']">
+    <el-menu :default-active="$route.name" :router="true" :default-openeds="['Entity', 'Other']">
       <el-menu-item index="UserDashboard" :route="{name: 'UserDashboard'}">首页</el-menu-item>
-      <el-submenu index="Project">
-        <template slot="title">项目管理</template>
-        <el-menu-item index="ProjectList" :route="{name: 'ProjectList'}">项目列表</el-menu-item>
+      <el-submenu index="Entity">
+        <template slot="title">实体管理</template>
+        <el-menu-item index="EntityList" :route="{name: 'EntityList'}">实体列表</el-menu-item>
       </el-submenu>
       <el-submenu index="Other">
         <template slot="title">其他</template>

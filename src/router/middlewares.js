@@ -29,7 +29,7 @@ const logoutConfirm = (to, from, next) => {
   })
 }
 const loginRequired = (to, from, next) => {
-  if (store.currentUser) {
+  if (store.state.currentUser) {
     next()
   } else {
     store.dispatch('getCurrentUser').then(user => {
